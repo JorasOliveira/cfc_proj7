@@ -4,6 +4,7 @@ from suaBibSignal import *
 import numpy as np
 import sounddevice as sd
 import matplotlib.pyplot as plt
+import sys
 
 #funções a serem utilizadas
 def signal_handler(signal, frame):
@@ -46,7 +47,7 @@ def main():
     plt.show()
     # aguarda fim do audio
     sd.wait()
-    plotFFT(self, signal, fs)
+    plt.plotFFT(self, signal, fs)
     
 
 if __name__ == "__main__":
