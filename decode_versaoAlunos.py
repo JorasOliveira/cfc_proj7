@@ -30,8 +30,8 @@ def main():
     
     sd.default.samplerate = freqDeAmostragem #taxa de amostragem
     sd.default.channels = 2  #voce pode ter que alterar isso dependendo da sua placa
-    duration = 1 #tempo em segundos que ira aquisitar o sinal acustico captado pelo mic
-    rec_time = 1 #tempo que vamos ficar gravadno
+    duration = 0.5 #tempo em segundos que ira aquisitar o sinal acustico captado pelo mic
+    rec_time = 0.5 #tempo que vamos ficar gravadno
 
 
     # faca um print na tela dizendo que a captacao comecará em n segundos. e entao 
@@ -55,7 +55,7 @@ def main():
     
     #analise sua variavel "audio". pode ser um vetor com 1 ou 2 colunas, lista ...
     #grave uma variavel com apenas a parte que interessa (dados)
-    #print(audio)
+   
     print(f"tamando da variavel audio: {len(audio)}")
     
 
