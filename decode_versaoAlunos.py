@@ -79,7 +79,7 @@ def main():
     #voce deve tambem evitar que dois picos proximos sejam identificados, pois pequenas variacoes na
     #frequencia do sinal podem gerar mais de um pico, e na verdade tempos apenas 1.
    
-    index = peakutils.indexes(yf, thres=0.5, min_dist=20)
+    index = peakutils.indexes(yf, thres=0.25, min_dist=200)
     picos = []
     for i in index:
         # print(i)
@@ -89,10 +89,20 @@ def main():
     picos.sort(reverse=True)
     print(picos)
 
-    if picos == [339,941]:
+    #limpando a lista de picos
+
+    for p in picos:
+        if p >= 1500 or p <= 600:
+            picos.remove(p)
+        if p == 1981:
+            picos.remove(p)
+
+    print(picos)
+
+    if picos == [1339,941]:
         print("Numero 0")
 
-    if picos == [1209,697]:
+    if picos == [1206,697]:
         print("Numero 1")
 
     if picos == [1339,697]:
