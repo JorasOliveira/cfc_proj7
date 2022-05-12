@@ -7,6 +7,7 @@ import numpy as np
 import sounddevice as sd
 import matplotlib.pyplot as plt
 import time
+import peakutils
 
 
 
@@ -30,8 +31,8 @@ def main():
     
     sd.default.samplerate = freqDeAmostragem #taxa de amostragem
     sd.default.channels = 2  #voce pode ter que alterar isso dependendo da sua placa
-    duration = 0.5 #tempo em segundos que ira aquisitar o sinal acustico captado pelo mic
-    rec_time = 0.5 #tempo que vamos ficar gravadno
+    duration = 5 #tempo em segundos que ira aquisitar o sinal acustico captado pelo mic
+    rec_time = 5 #tempo que vamos ficar gravadno
 
 
     # faca um print na tela dizendo que a captacao comecará em n segundos. e entao 
@@ -49,12 +50,13 @@ def main():
     numAmostras = rec_time * freqDeAmostragem
    
     audio = sd.rec(int(numAmostras), freqDeAmostragem, channels=1)
-    audio = audio.tolist()
+    print(len(audio))
     sd.wait()
     print("...     FIM")
     
     #analise sua variavel "audio". pode ser um vetor com 1 ou 2 colunas, lista ...
     #grave uma variavel com apenas a parte que interessa (dados)
+
    
     print(f"tamando da variavel audio: {len(audio)}")
     
@@ -66,19 +68,25 @@ def main():
    
     
     ## Calcula e exibe o Fourier do sinal audio. como saida tem-se a amplitude e as frequencias
-    xf, yf = signal.calcFFT(audio, freqDeAmostragem)
+    xf, yf = signal.calcFFT(audio[:,0], freqDeAmostragem)
     plt.figure("F(y)")
     plt.plot(xf,yf)
     plt.grid()
     plt.title('Fourier audio')
-    
 
     #esta funcao analisa o fourier e encontra os picos
     #voce deve aprender a usa-la. ha como ajustar a sensibilidade, ou seja, o que é um pico?
     #voce deve tambem evitar que dois picos proximos sejam identificados, pois pequenas variacoes na
     #frequencia do sinal podem gerar mais de um pico, e na verdade tempos apenas 1.
    
-    # index = peakutils.indexes(,,)
+    index = peakutils.indexes(yf, thres=0.5, min_dist=20)
+    picos = []
+    for i in index:
+        # print(i)
+        picos.append(xf[i])
+        print(f'pico : {xf[i]}')
+    # print(xf[index[0]])
+    # print(index[1])
     
     #printe os picos encontrados! 
     
