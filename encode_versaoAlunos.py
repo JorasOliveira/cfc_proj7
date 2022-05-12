@@ -81,19 +81,29 @@ def main():
         sinal = [1477,852]
     
     #for i in range
-    t0, tone0 = signal.generateSin(sinal[0], 1, 3, fs)
+    t0, tone0 = signal.generateSin(sinal[0], 1, 5, fs)
 
-    t1, tone1 = signal.generateSin(sinal[1], 1, 3, fs)
-
+    t1, tone1 = signal.generateSin(sinal[1], 1, 5, fs)
 
     tone_a = tone0 + tone1
 
     sd.play(tone_a, fs)
-    # Exibe gráficos
-    plt.show()
+
     # aguarda fim do audio
+    
     sd.wait()
-    # plt.plotFFT(self, signal, fs)
+
+    # Exibe gráficos
+
+    plt.plot(t0, tone_a)
+    plt.xlabel('Tempo em segundos')
+    plt.xlim(0, 0.02)
+    plt.ylabel('Frequências somadas')
+
+    signal.plotFFT(tone_a, fs)
+    
+    plt.show()
+
     
 
 if __name__ == "__main__":
