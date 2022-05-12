@@ -37,17 +37,63 @@ def main():
     # construa o gráfico do sinal emitido e o gráfico da transformada de Fourier. Cuidado. Como as frequencias sao relativamente altas, voce deve plotar apenas alguns pontos (alguns periodos) para conseguirmos ver o sinal
     
 
+    # Construção de senoide: A*sin(2*pi*f*t), tem função
+
+    
+
     print("Inicializando encoder")
+
+    signal = signalMeu()
+
+
     print("Aguardando usuário")
+
+
+    pergunta = input('Entre 0 e 9, qual teclas você deseja apertar?')
+
+    NUM = int(pergunta)
+
     print("Gerando Tons base")
     print("Executando as senoides (emitindo o som)")
     print("Gerando Tom referente ao símbolo : {}".format(NUM))
-    sd.play(tone, fs)
+
+    fs = 44100
+    
+    if NUM == 0:
+        sinal = [1339,941]
+    if NUM == 1:
+        sinal = [1206,697]
+    if NUM == 2:
+        sinal = [1339,697]
+    if NUM == 3:
+        sinal = [1477,697]
+    if NUM == 4:
+        sinal = [1206,770]
+    if NUM == 5:
+        sinal = [1339,770]
+    if NUM == 6:
+        sinal = [1477,770]
+    if NUM == 7:
+        sinal = [1206,852]
+    if NUM == 8:
+        sinal = [1339,852]
+    if NUM == 9:
+        sinal = [1477,852]
+    
+    #for i in range
+    t0, tone0 = signal.generateSin(sinal[0], 1, 3, fs)
+
+    t1, tone1 = signal.generateSin(sinal[1], 1, 3, fs)
+
+
+    tone_a = tone0 + tone1
+
+    sd.play(tone_a, fs)
     # Exibe gráficos
     plt.show()
     # aguarda fim do audio
     sd.wait()
-    plt.plotFFT(self, signal, fs)
+    # plt.plotFFT(self, signal, fs)
     
 
 if __name__ == "__main__":
