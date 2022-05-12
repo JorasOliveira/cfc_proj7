@@ -31,7 +31,7 @@ def main():
     
     sd.default.samplerate = freqDeAmostragem #taxa de amostragem
     sd.default.channels = 2  #voce pode ter que alterar isso dependendo da sua placa
-    duration = 5 #tempo em segundos que ira aquisitar o sinal acustico captado pelo mic
+    duration = 1 #tempo em segundos que ira aquisitar o sinal acustico captado pelo mic
     rec_time = 5 #tempo que vamos ficar gravadno
 
 
@@ -83,10 +83,42 @@ def main():
     picos = []
     for i in index:
         # print(i)
-        picos.append(xf[i])
-        print(f'pico : {xf[i]}')
-    # print(xf[index[0]])
-    # print(index[1])
+        picos.append(int(xf[i]))
+        # print(f'pico : {xf[i]}')
+
+    picos.sort(reverse=True)
+    print(picos)
+
+    if picos == [339,941]:
+        print("Numero 0")
+
+    if picos == [1209,697]:
+        print("Numero 1")
+
+    if picos == [1339,697]:
+        print("Numero 2")
+
+    if picos == [1477,697]:
+        print("Numero 3")
+
+    if picos == [1206,770]:
+        print("Numero 4")
+
+    if picos == [1339,770]:
+        print("Numero 5")
+
+    if picos == [1477,770]:
+        print("Numero 6")
+
+    if picos == [1206,852]:
+        print("Numero 7")
+
+    if picos == [1339,852]:
+        print("Numero 8")
+
+    if picos == [1477,852]:
+        print("Numero 9")
+
     
     #printe os picos encontrados! 
     
