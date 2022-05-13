@@ -89,44 +89,34 @@ def main():
     picos.sort(reverse=True)
     print(picos)
 
-    #limpando a lista de picos
-
-    for p in picos:
-        if p >= 1500 or p <= 600:
-            picos.remove(p)
-        if p == 1981:
-            picos.remove(p)
-
-    print(picos)
-
-    if picos == [1339,941]:
+    if (1339 in picos) and (941 in picos):
         print("Numero 0")
 
-    if picos == [1206,697]:
+    if (1206 in picos) and (697 in picos):
         print("Numero 1")
 
-    if picos == [1339,697]:
+    if (1339 in picos) and (697 in picos):
         print("Numero 2")
 
-    if picos == [1477,697]:
+    if (1477 in picos) and (697 in picos):
         print("Numero 3")
 
-    if picos == [1206,770]:
+    if (1206 in picos) and (770 in picos):
         print("Numero 4")
 
-    if picos == [1339,770]:
+    if (1339 in picos) and (770 in picos):
         print("Numero 5")
 
-    if picos == [1477,770]:
+    if (1477 in picos) and (770 in picos):
         print("Numero 6")
 
-    if picos == [1206,852]:
+    if (1206 in picos) and (852 in picos):
         print("Numero 7")
 
-    if picos == [1339,852]:
+    if (1339 in picos) and (852 in picos):
         print("Numero 8")
 
-    if picos == [1477,852]:
+    if (1477 in picos) and (852 in picos):
         print("Numero 9")
 
     
