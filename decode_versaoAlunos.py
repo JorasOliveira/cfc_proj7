@@ -86,38 +86,44 @@ def main():
         picos.append(int(xf[i]))
         # print(f'pico : {xf[i]}')
 
-    picos.sort(reverse=True)
-    print(picos)
 
-    if (1339 in picos) and (941 in picos):
-        print("Numero 0")
+    #TODO: multiplicar o audio pela frequencia original para desmodular, 
+    #filtras as frquencias altas e tocar o audio original
 
-    if (1206 in picos) and (697 in picos):
-        print("Numero 1")
+    ####P7####
+    # picos.sort(reverse=True)
+    # print(picos)
 
-    if (1339 in picos) and (697 in picos):
-        print("Numero 2")
+    # if (1339 in picos) and (941 in picos):
+    #     print("Numero 0")
 
-    if (1477 in picos) and (697 in picos):
-        print("Numero 3")
+    # if (1206 in picos) and (697 in picos):
+    #     print("Numero 1")
 
-    if (1206 in picos) and (770 in picos):
-        print("Numero 4")
+    # if (1339 in picos) and (697 in picos):
+    #     print("Numero 2")
 
-    if (1339 in picos) and (770 in picos):
-        print("Numero 5")
+    # if (1477 in picos) and (697 in picos):
+    #     print("Numero 3")
 
-    if (1477 in picos) and (770 in picos):
-        print("Numero 6")
+    # if (1206 in picos) and (770 in picos):
+    #     print("Numero 4")
 
-    if (1206 in picos) and (852 in picos):
-        print("Numero 7")
+    # if (1339 in picos) and (770 in picos):
+    #     print("Numero 5")
 
-    if (1339 in picos) and (852 in picos):
-        print("Numero 8")
+    # if (1477 in picos) and (770 in picos):
+    #     print("Numero 6")
 
-    if (1477 in picos) and (852 in picos):
-        print("Numero 9")
+    # if (1206 in picos) and (852 in picos):
+    #     print("Numero 7")
+
+    # if (1339 in picos) and (852 in picos):
+    #     print("Numero 8")
+
+    # if (1477 in picos) and (852 in picos):
+    #     print("Numero 9")
+    ####P7####
 
     
     #printe os picos encontrados! 
