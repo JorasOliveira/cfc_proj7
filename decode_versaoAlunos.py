@@ -8,6 +8,7 @@ import sounddevice as sd
 import matplotlib.pyplot as plt
 import time
 import peakutils
+from funcoes_LPF import *
 
 
 
@@ -87,8 +88,18 @@ def main():
         # print(f'pico : {xf[i]}')
 
 
-    #TODO: multiplicar o audio pela frequencia original para desmodular, 
-    #filtras as frquencias altas e tocar o audio original
+    #TODO: plotar os graficos, e testar
+    
+
+    #desmodulando
+    t0, tone = signal.generateSin(13000, 1, 5, freqDeAmostragem)
+    som = audio * tone
+
+    #filtrando
+    som_filtrado = LPF(som, 2500, freqDeAmostragem)
+
+    #tocando
+    sd.play(som_filtrado, freqDeAmostragem)
 
     ####P7####
     # picos.sort(reverse=True)
