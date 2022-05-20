@@ -80,7 +80,6 @@ def main():
     if NUM == 9:
         sinal = [1477,852]
     
-    #for i in range
     t0, tone0 = signal.generateSin(sinal[0], 1, 5, fs)
 
     t1, tone1 = signal.generateSin(sinal[1], 1, 5, fs)
