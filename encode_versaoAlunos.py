@@ -48,6 +48,10 @@ def main():
 
     fs = 44100
 
+    dur = 6*fs
+    freq = np.linspace(0, 44100, dur)
+    t = np.linspace(0, 6, dur)
+
     sp, data = wavfile.read('Voz-001.wav')
     data = data[:fs*6]
 
@@ -66,15 +70,20 @@ def main():
 
     print('tocando o audio')
 
-    sd.play(final,fs)
+    # sd.play(final,fs)
 
-    sd.wait()
+    # sd.wait()
 
-    write('modulado.wav', fs, final)
+    # write('modulado.wav', fs, final)
+    xf, yf = signal.calcFFT(dps_filtro, fs)
 
-    signal.plotFFT(final, fs)
-    signal.plotFFT(dps_filtro, fs)
-    
+    plt.plot(xf, yf) #filtrado por frequencia
+    plt.xlabel('Tempo em segundos')
+    plt.ylabel('Frequências')
+    plt.show()
+    plt.plot(t, dps_filtro) #filtrado por tempo
+    plt.xlabel('Tempo em segundos')
+    plt.ylabel('Frequências')
     plt.show()
 
     
