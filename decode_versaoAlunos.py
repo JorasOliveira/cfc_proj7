@@ -109,6 +109,11 @@ def main():
     sd.play(som_filtrado, freqDeAmostragem)
     sd.wait()
 
+    plt.figure("Sinal demodulado, dominio do tempo")
+    plt.plot(t, som_filtrado)
+    plt.grid()
+    plt.title('Modulado - Tempo')
+
     #calcula e plota o grafico do sinal demodulado
     #dominio da frquencia
     # xf, yf = signal.calcFFT(som_filtrado, freqDeAmostragem)
@@ -117,11 +122,12 @@ def main():
     # plt.grid()
     # plt.title('Desmodulado - Fourier')
 
-    #dominio do tempo:
-    plt.figure("Sinal Demodulado, dominio do tempo")
-    plt.plot(t ,som_filtrado)
+    #demodulado e filtrado - dominio da frequencia:
+    xf, yf = signal.calcFFT(som_filtrado, freqDeAmostragem)
+    plt.figure("Sinal Demodulado e Filtrado, dominio da frequencia")
+    plt.plot(xf, yf)
     plt.grid()
-    plt.title('Demodulado - Tempo')
+    plt.title('Demodulado e Filtrado s- Tempo')
     
     # plt.show()
 
