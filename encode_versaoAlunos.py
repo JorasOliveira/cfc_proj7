@@ -5,6 +5,9 @@ import numpy as np
 import sounddevice as sd
 import matplotlib.pyplot as plt
 import sys
+from funcoes_LPF import *
+from scipy.io import wavfile
+from scipy.io.wavfile import write
 
 #funções a serem utilizadas
 def signal_handler(signal, frame):
@@ -43,67 +46,91 @@ def main():
 
     print("Inicializando encoder")
 
+    fs = 44100
+
+    sp, data = wavfile.read('Voz-001.wav')
+    data = data[:fs*6]
+
     signal = signalMeu()
 
-
-    print("Aguardando usuário")
-
-
-    pergunta = input('Entre 0 e 9, qual teclas você deseja apertar?')
-
-    NUM = int(pergunta)
-
-    print("Gerando Tons base")
-    print("Executando as senoides (emitindo o som)")
-    print("Gerando Tom referente ao símbolo : {}".format(NUM))
-
-    fs = 44100
+    t0, tone0 = signal.generateSin(13000, 1, 6, fs)
     
-    if NUM == 0:
-        sinal = [1339,941]
-    if NUM == 1:
-        sinal = [1206,697]
-    if NUM == 2:
-        sinal = [1339,697]
-    if NUM == 3:
-        sinal = [1477,697]
-    if NUM == 4:
-        sinal = [1206,770]
-    if NUM == 5:
-        sinal = [1339,770]
-    if NUM == 6:
-        sinal = [1477,770]
-    if NUM == 7:
-        sinal = [1206,852]
-    if NUM == 8:
-        sinal = [1339,852]
-    if NUM == 9:
-        sinal = [1477,852]
-    
-    #for i in range
-    t0, tone0 = signal.generateSin(sinal[0], 1, 5, fs)
+    print('Fazendo o Filtro passa baixo')
+    dps_filtro = LPF(data, 2500 , fs)
 
-    t1, tone1 = signal.generateSin(sinal[1], 1, 5, fs)
+    maior = max(dps_filtro)
 
-    tone_a = tone0 + tone1
+    mod = dps_filtro*tone0
 
-    sd.play(tone_a, fs)
+    final = (1/maior)*mod
 
-    # aguarda fim do audio
-    
+    print('tocando o audio')
+
+    sd.play(final,fs)
+
     sd.wait()
 
-    # Exibe gráficos
+    write('modulado.wav', fs, final)
 
-    plt.plot(t0, tone_a)
-    plt.xlabel('Tempo em segundos')
-    plt.xlim(0, 0.02)
-    plt.ylabel('Frequências somadas')
-
-    signal.plotFFT(tone_a, fs)
+    signal.plotFFT(final, fs)
+    signal.plotFFT(dps_filtro, fs)
     
     plt.show()
 
+    
+
+
+    # print("Aguardando usuário")
+
+
+    # pergunta = input('Entre 0 e 9, qual teclas você deseja apertar?')
+
+    # NUM = int(pergunta)
+
+    # print("Gerando Tons base")
+    # print("Executando as senoides (emitindo o som)")
+    # print("Gerando Tom referente ao símbolo : {}".format(NUM))
+    
+    # if NUM == 0:
+    #     sinal = [1339,941]
+    # if NUM == 1:
+    #     sinal = [1206,697]
+    # if NUM == 2:
+    #     sinal = [1339,697]
+    # if NUM == 3:
+    #     sinal = [1477,697]
+    # if NUM == 4:
+    #     sinal = [1206,770]
+    # if NUM == 5:
+    #     sinal = [1339,770]
+    # if NUM == 6:
+    #     sinal = [1477,770]
+    # if NUM == 7:
+    #     sinal = [1206,852]
+    # if NUM == 8:
+    #     sinal = [1339,852]
+    # if NUM == 9:
+    #     sinal = [1477,852]
+    
+    # #for i in range
+    # t0, tone0 = signal.generateSin(sinal[0], 1, 5, fs)
+
+    # t1, tone1 = signal.generateSin(sinal[1], 1, 5, fs)
+
+    # tone_a = tone0 + tone1
+
+    # sd.play(tone_a, fs)
+
+    # # aguarda fim do audio
+    
+    # sd.wait()
+
+    # # Exibe gráficos
+
+    # plt.plot(t0, tone_a)
+    # plt.xlabel('Tempo em segundos')
+    # plt.xlim(0, 0.02)
+    # plt.ylabel('Frequências somadas')
     
 
 if __name__ == "__main__":
